@@ -1,0 +1,8 @@
+# O dataset é gerado por material/gerar_dataset.py (seed 42 reproduz byte a byte).
+dados/
+
+__pycache__/
+.venv/
+.DS_Store
+.databricks/
+node_modules/
