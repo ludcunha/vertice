@@ -1,10 +1,20 @@
-# Python-generated files
+# Python
 __pycache__/
 *.py[oc]
 build/
 dist/
 wheels/
 *.egg-info
+.venv/
 
-# Virtual environments
-.venv
+# Estado do bundle e chaves do data lake (variable-overrides.json): nunca no Git
+.databricks/
+
+# O dataset é gerado por material/gerar_dataset.py (seed 42 reproduz byte a byte).
+dados/
+
+# Skills do Claude Code (cópia instalada pela CLI: databricks aitools install)
+.claude/
+
+.DS_Store
+node_modules/
