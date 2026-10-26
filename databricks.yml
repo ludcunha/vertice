@@ -1,0 +1,41 @@
+# Bundle vertice: o Projeto Farol (Torre de Controle da Vértice Tecnologia).
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: vertice
+  uuid: 3f1a143d-c193-4c13-84ff-41ab074dd44b
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Catálogo do projeto (bronze, silver e gold)
+    default: lakehouse_vertice
+  warehouse_id:
+    description: SQL warehouse das sql_task (Serverless Starter Warehouse)
+    default: a8da3fe66b506efb
+  # As chaves do data lake não têm default: o valor fica em
+  # .databricks/bundle/dev/variable-overrides.json, que o .gitignore deixa fora do Git.
+  s3_access_key_id:
+    description: chave do data lake (o valor fica fora do Git)
+  s3_secret_access_key:
+    description: chave do data lake (o valor fica fora do Git)
+
+targets:
+  dev:
+    # Sem 'mode: development': ele prefixaria os nomes com '[dev usuario]'.
+    # O preset abaixo só garante que nenhum agendamento dispare sozinho no dev.
+    default: true
+    presets:
+      trigger_pause_status: PAUSED
+    workspace:
+      host: https://dbc-db6cd8f7-64de.cloud.databricks.com
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-db6cd8f7-64de.cloud.databricks.com
+      # We explicitly deploy to /Workspace/Users/alimdul16@gmail.com to make sure we only have a single copy.
+      root_path: /Workspace/Users/alimdul16@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - user_name: alimdul16@gmail.com
+        level: CAN_MANAGE
