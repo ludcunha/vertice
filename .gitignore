@@ -6,6 +6,7 @@ dist/
 wheels/
 *.egg-info
 .venv/
+.env
 
 # Estado do bundle e chaves do data lake (variable-overrides.json): nunca no Git
 .databricks/
